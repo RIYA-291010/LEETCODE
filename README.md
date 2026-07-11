@@ -5,19 +5,19 @@
 ## 📊 Progress
 
 <!-- STATS:START -->
-![Solved](https://img.shields.io/badge/Solved-7-brightgreen)
-![Easy](https://img.shields.io/badge/Easy-4-success)
-![Medium](https://img.shields.io/badge/Medium-2-yellow)
-![Hard](https://img.shields.io/badge/Hard-1-red)
+![Solved](https://img.shields.io/badge/Solved-0-brightgreen)
+![Easy](https://img.shields.io/badge/Easy-0-success)
+![Medium](https://img.shields.io/badge/Medium-0-yellow)
+![Hard](https://img.shields.io/badge/Hard-0-red)
 
 | Metric              | Count |
 |----------------------|-------|
-| ✅ Total Solved       | 7     |
-| 🟢 Easy               | 4     |
-| 🟡 Medium             | 2     |
-| 🔴 Hard               | 1     |
+| ✅ Total Solved       | 0     |
+| 🟢 Easy               | 0     |
+| 🟡 Medium             | 0     |
+| 🔴 Hard               | 0     |
 
-*Last updated: 2026-07-11*
+*Last updated: —*
 <!-- STATS:END -->
 
 *This section updates automatically after every sync — no need to edit it manually.*
@@ -26,16 +26,12 @@
 
 ## 📁 Repository Structure
 
-\`\`\`
+<!-- TREE:START -->
+```
 solutions/
-├── 1-two-sum/
-├── 20-valid-parentheses/
-├── 53-maximum-subarray/
-├── 74-search-a-2d-matrix/
-├── 704-binary-search/
-├── 42-trapping-rain-water/
-└── ...
-\`\`\`
+└── (populated automatically after the first sync)
+```
+<!-- TREE:END -->
 
 Each solution folder includes the source code and a link back to the original problem.
 
@@ -47,8 +43,8 @@ Solutions are synced automatically from LeetCode using the [leetcode-sync](https
 
 - ✅ Only **accepted** submissions are synced
 - 🔁 Runs daily via a scheduled GitHub Action (and can be triggered manually)
-- 🗂️ New solutions land in the \`solutions/\` folder automatically
-- 📊 The stats above are regenerated automatically after every sync by \`update_readme.js\`
+- 🗂️ New solutions land in the `solutions/` folder automatically
+- 📊 The stats and structure above are regenerated automatically after every sync by `update_readme.js`
 
 ---
 
