@@ -5,19 +5,19 @@
 ## 📊 Progress
 
 <!-- STATS:START -->
-![Solved](https://img.shields.io/badge/Solved-0-brightgreen)
-![Easy](https://img.shields.io/badge/Easy-0-success)
-![Medium](https://img.shields.io/badge/Medium-0-yellow)
-![Hard](https://img.shields.io/badge/Hard-0-red)
+![Solved](https://img.shields.io/badge/Solved-7-brightgreen)
+![Easy](https://img.shields.io/badge/Easy-4-success)
+![Medium](https://img.shields.io/badge/Medium-2-yellow)
+![Hard](https://img.shields.io/badge/Hard-1-red)
 
 | Metric              | Count |
 |----------------------|-------|
-| ✅ Total Solved       | 0     |
-| 🟢 Easy               | 0     |
-| 🟡 Medium             | 0     |
-| 🔴 Hard               | 0     |
+| ✅ Total Solved       | 7     |
+| 🟢 Easy               | 4     |
+| 🟡 Medium             | 2     |
+| 🔴 Hard               | 1     |
 
-*Last updated: —*
+*Last updated: 2026-07-11*
 <!-- STATS:END -->
 
 *This section updates automatically after every sync — no need to edit it manually.*
@@ -29,7 +29,13 @@
 <!-- TREE:START -->
 ```
 solutions/
-└── (populated automatically after the first sync)
+├── 0001-two-sum/
+├── 0009-palindrome-number/
+├── 0020-valid-parentheses/
+├── 0042-trapping-rain-water/
+├── 0053-maximum-subarray/
+├── 0074-search-a-2d-matrix/
+└── 0792-binary-search/
 ```
 <!-- TREE:END -->
 
