@@ -1,7 +1,8 @@
 // update_readme.js
 // Scans the solutions/ folder, looks up each problem's difficulty directly
 // from LeetCode's public API (cached locally so we don't re-fetch every run),
-// and rewrites the stats section of README.md between the markers below.
+// and rewrites both the stats section and the repo structure section of
+// README.md between their respective markers.
 
 const fs = require("fs");
 const path = require("path");
@@ -10,15 +11,18 @@ const SOLUTIONS_DIR = path.join(process.cwd(), "solutions");
 const README_PATH = path.join(process.cwd(), "README.md");
 const CACHE_PATH = path.join(process.cwd(), "difficulty-cache.json");
 
-const START_MARKER = "<!-- STATS:START -->";
-const END_MARKER = "<!-- STATS:END -->";
+const STATS_START = "<!-- STATS:START -->";
+const STATS_END = "<!-- STATS:END -->";
+const TREE_START = "<!-- TREE:START -->";
+const TREE_END = "<!-- TREE:END -->";
 
 function getProblemFolders() {
   if (!fs.existsSync(SOLUTIONS_DIR)) return [];
   return fs
     .readdirSync(SOLUTIONS_DIR, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
-    .map((entry) => entry.name);
+    .map((entry) => entry.name)
+    .sort();
 }
 
 // "0001-two-sum" -> "two-sum"
@@ -64,7 +68,7 @@ async function fetchDifficulty(slug) {
 }
 
 function buildStatsSection(counts, total) {
-  return `${START_MARKER}
+  return `${STATS_START}
 ![Solved](https://img.shields.io/badge/Solved-${total}-brightgreen)
 ![Easy](https://img.shields.io/badge/Easy-${counts.Easy}-success)
 ![Medium](https://img.shields.io/badge/Medium-${counts.Medium}-yellow)
@@ -78,7 +82,43 @@ function buildStatsSection(counts, total) {
 | 🔴 Hard               | ${counts.Hard}     |
 
 *Last updated: ${new Date().toISOString().split("T")[0]}*
-${END_MARKER}`;
+${STATS_END}`;
+}
+
+function buildTreeSection(folders) {
+  const maxShown = 15;
+  const shown = folders.slice(0, maxShown);
+  const lines = shown.map((f, i) => {
+    const isLast = i === shown.length - 1 && folders.length <= maxShown;
+    return `${isLast ? "└──" : "├──"} ${f}/`;
+  });
+
+  if (folders.length > maxShown) {
+    lines.push(`└── ... (${folders.length - maxShown} more)`);
+  }
+
+  return `${TREE_START}
+\`\`\`
+solutions/
+${lines.join("\n")}
+\`\`\`
+${TREE_END}`;
+}
+
+function replaceBetweenMarkers(content, startMarker, endMarker, replacement) {
+  const startIdx = content.indexOf(startMarker);
+  const endIdx = content.indexOf(endMarker);
+
+  if (startIdx === -1 || endIdx === -1) {
+    console.error(
+      `Could not find ${startMarker} / ${endMarker} markers in README.md. Add them and re-run.`
+    );
+    process.exit(1);
+  }
+
+  const before = content.slice(0, startIdx);
+  const after = content.slice(endIdx + endMarker.length);
+  return `${before}${replacement}${after}`;
 }
 
 async function updateReadme() {
@@ -106,26 +146,16 @@ async function updateReadme() {
 
   const total = folders.length;
   const statsSection = buildStatsSection(counts, total);
+  const treeSection = buildTreeSection(folders);
 
   let readme = fs.existsSync(README_PATH)
     ? fs.readFileSync(README_PATH, "utf8")
-    : `# 🧩 LeetCode Solutions\n\n${START_MARKER}\n${END_MARKER}\n`;
+    : `# 🧩 LeetCode Solutions\n\n${STATS_START}\n${STATS_END}\n\n${TREE_START}\n${TREE_END}\n`;
 
-  const startIdx = readme.indexOf(START_MARKER);
-  const endIdx = readme.indexOf(END_MARKER);
+  readme = replaceBetweenMarkers(readme, STATS_START, STATS_END, statsSection);
+  readme = replaceBetweenMarkers(readme, TREE_START, TREE_END, treeSection);
 
-  if (startIdx === -1 || endIdx === -1) {
-    console.error(
-      "Could not find STATS:START / STATS:END markers in README.md. Add them and re-run."
-    );
-    process.exit(1);
-  }
-
-  const before = readme.slice(0, startIdx);
-  const after = readme.slice(endIdx + END_MARKER.length);
-
-  const updatedReadme = `${before}${statsSection}${after}`;
-  fs.writeFileSync(README_PATH, updatedReadme, "utf8");
+  fs.writeFileSync(README_PATH, readme, "utf8");
 
   console.log(`README updated: ${total} problems (${JSON.stringify(counts)})`);
 }
