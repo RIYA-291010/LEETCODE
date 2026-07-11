@@ -6,16 +6,16 @@
 
 <!-- STATS:START -->
 ![Solved](https://img.shields.io/badge/Solved-7-brightgreen)
-![Easy](https://img.shields.io/badge/Easy-0-success)
-![Medium](https://img.shields.io/badge/Medium-0-yellow)
-![Hard](https://img.shields.io/badge/Hard-0-red)
+![Easy](https://img.shields.io/badge/Easy-4-success)
+![Medium](https://img.shields.io/badge/Medium-2-yellow)
+![Hard](https://img.shields.io/badge/Hard-1-red)
 
 | Metric              | Count |
 |----------------------|-------|
 | ✅ Total Solved       | 7     |
-| 🟢 Easy               | 0     |
-| 🟡 Medium             | 0     |
-| 🔴 Hard               | 0     |
+| 🟢 Easy               | 4     |
+| 🟡 Medium             | 2     |
+| 🔴 Hard               | 1     |
 
 *Last updated: 2026-07-11*
 <!-- STATS:END -->
